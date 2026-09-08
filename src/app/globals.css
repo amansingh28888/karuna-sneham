@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-background text-ink font-body;
+}
+
+h1, h2, h3, h4 {
+  @apply font-display;
+}
+
+::selection {
+  background-color: theme("colors.secondary.light");
+  color: theme("colors.primary.dark");
+}
+
+*:focus-visible {
+  outline: 3px solid theme("colors.accent.DEFAULT");
+  outline-offset: 2px;
+}
