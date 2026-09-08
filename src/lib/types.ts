@@ -16,7 +16,7 @@ export interface GalleryItem {
   title: string;
   description: string | null;
   media_type: "image" | "video";
-  storage_path: string; // public URL, resolved when read/written
+  storage_path: string;
   event_date: string | null;
   published: boolean;
   created_at: string;
@@ -75,32 +75,44 @@ export interface ContactMessage {
   created_at: string;
 }
 
-// Real values already provided for Karuna Sneham Foundation — used only if
-// the app runs before Supabase env vars are set, so the site never shows
-// placeholder/fake content. Once Supabase is connected, this is bypassed
-// entirely in favour of the site_settings row seeded by schema.sql.
+// Fallback settings used only when Supabase is not configured.
 export const fallbackSettings: SiteSettings = {
   id: 1,
   ngo_name: "Karuna Sneham Foundation",
   tagline: "Saving a smile, building a better tomorrow",
+
   cin: "U88900UP2026NPL250077",
   founded_date: "2026-07-14",
+
   phone: "+91 9296804691",
   email: "karunasneham.ngo@gmail.com",
+
   address:
     "B25, Badri Nagar Colony, Varanasi, Nathupur, Bhulanpur Pac, Varanasi, Varanasi, Uttar Pradesh, India, 221108",
+
   map_link: "https://share.google/Y1c8ioOVTg6BjOcnW",
+
   whatsapp_number: "919296804691",
+
   whatsapp_order_message:
     "Hello, I would like to book a celebration package for children through Karuna Sneham Foundation. Please share the available packages and details.",
+
   instagram_link: "https://www.instagram.com/karunasneham.ngo",
+
   facebook_link: null,
   youtube_link: null,
+
   founder_name: "Aman Singh",
+
   founder_role: "Founder, Karuna Sneham Foundation",
+
   founder_bio:
     'Aman Singh is the founder of Karuna Sneham Foundation, driven by a passion for creating meaningful social impact and bringing happiness to underprivileged children and communities. Alongside his work with the foundation, Aman is pursuing an MBA in Business Analytics at Chandigarh University, where he is developing his expertise in data analytics, business strategy, technology, and problem-solving. He believes that meaningful change happens when compassion is combined with action. Through Karuna Sneham Foundation, he aims to create opportunities for individuals to turn their special moments — such as birthdays and anniversaries — into moments of happiness for children in need. "A celebration becomes more meaningful when it brings a smile to someone who needs it."',
+
+  founder_image_url: null,
+
   upi_id: null,
   bank_details: null,
+
   updated_at: new Date().toISOString(),
 };
