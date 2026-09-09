@@ -45,7 +45,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
         <div className="relative">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-card shadow-warm">
             <Image
-              src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?q=80&w=1200&auto=format&fit=crop"
+              src="/children.jpeg"
               alt="Children celebrating together"
               fill
               className="object-cover"
