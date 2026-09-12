@@ -1,63 +1,81 @@
 import SectionHeading from "@/components/SectionHeading";
 import ImpactStats from "@/components/ImpactStats";
+import DonationSection from "@/components/DonationSection";
 import CTAButton from "@/components/CTAButton";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { getSiteSettings, getImpactStatistics } from "@/lib/data";
+import { ShieldCheck, Heart, Sparkles, CheckCircle2 } from "lucide-react";
 
-export const metadata = { title: "Donate | Karuna Sneham Foundation" };
+export const metadata = { title: "Donate & Support | Karuna Sneham Foundation" };
 
 export default async function DonatePage() {
   const [settings, impact] = await Promise.all([getSiteSettings(), getImpactStatistics()]);
   const waLink = buildWhatsAppLink(
     settings.whatsapp_number,
-    "Hello, I would like to know more about donating to Karuna Sneham Foundation."
+    "Hello Karuna Sneham Foundation, I would like to make a contribution / donation. Please guide me."
   );
 
   return (
-    <div className="mx-auto max-w-4xl px-5 py-16 space-y-14">
+    <div className="mx-auto max-w-5xl px-5 py-16 space-y-16">
       <SectionHeading
         align="center"
-        eyebrow="Donate"
-        title="Every contribution becomes a child's smile"
-        description="Your support — whether sponsoring a full celebration or contributing directly — helps us bring food, gifts, and joy to children who need it most."
+        eyebrow="Donate & Support"
+        title="Every Contribution Becomes a Child's Smile"
+        description="Your support — whether sponsoring a full celebration package or contributing any amount — directly funds nutritious food, celebration cakes, and educational gifts for children."
       />
 
       <ImpactStats stats={impact} />
 
-      <div className="rounded-card bg-surface p-8 shadow-warm sm:p-10">
-        <h3 className="font-display text-xl text-primary mb-3">How Your Donation Helps</h3>
-        <p className="text-ink-soft leading-relaxed">
-          Donations go directly toward meals, celebration essentials, and everyday care for
-          the children we work with. Every rupee is an act of shared celebration.
-        </p>
+      {/* Interactive Donation Section */}
+      <DonationSection
+        upiId={settings.upi_id}
+        bankDetails={settings.bank_details}
+        whatsappNumber={settings.whatsapp_number}
+      />
+
+      {/* Transparency & Impact Breakdown */}
+      <div className="rounded-3xl bg-surface p-8 sm:p-10 shadow-card border border-primary/10 grid gap-8 md:grid-cols-3">
+        <div className="space-y-2">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-rose-500/10 text-rose-600 mb-3">
+            <Heart className="h-5 w-5" />
+          </div>
+          <h4 className="font-display text-lg font-bold text-primary">100% Direct Impact</h4>
+          <p className="text-xs text-ink-soft leading-relaxed">
+            Every rupee contributed goes straight to meal preparation, celebration cakes, and child welfare items.
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 mb-3">
+            <ShieldCheck className="h-5 w-5" />
+          </div>
+          <h4 className="font-display text-lg font-bold text-primary">Verified Media Proof</h4>
+          <p className="text-xs text-ink-soft leading-relaxed">
+            Receive full HD photo and video clips on your WhatsApp after every celebration drive hosted.
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-600 mb-3">
+            <Sparkles className="h-5 w-5" />
+          </div>
+          <h4 className="font-display text-lg font-bold text-primary">Registered Non-Profit</h4>
+          <p className="text-xs text-ink-soft leading-relaxed">
+            Official incorporation under CIN U88900UP2026NPL250077 ensuring complete auditability and governance.
+          </p>
+        </div>
       </div>
 
-      {(settings.upi_id || settings.bank_details) && (
-        <div className="grid gap-6 sm:grid-cols-2">
-          {settings.upi_id && (
-            <div className="rounded-card bg-surface p-6 shadow-warm">
-              <p className="text-sm text-ink-soft">UPI ID</p>
-              <p className="font-semibold text-primary">{settings.upi_id}</p>
-            </div>
-          )}
-          {settings.bank_details && (
-            <div className="rounded-card bg-surface p-6 shadow-warm whitespace-pre-line">
-              <p className="text-sm text-ink-soft">Bank Details</p>
-              <p className="font-semibold text-primary">{settings.bank_details}</p>
-            </div>
-          )}
-        </div>
-      )}
-
-      <div className="rounded-card bg-primary p-8 text-center text-white shadow-warm sm:p-12">
-        <h2 className="font-display text-2xl sm:text-3xl">Ready to give?</h2>
-        <p className="mt-3 text-white/80 max-w-md mx-auto">
-          Message us on WhatsApp and we&apos;ll guide you through the simplest way to donate.
+      {/* WhatsApp CTA */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary to-primary-dark p-8 sm:p-12 text-center text-white shadow-2xl border border-white/10">
+        <h2 className="font-display text-2xl sm:text-4xl">Have Questions About Donating?</h2>
+        <p className="mt-3 text-white/80 max-w-md mx-auto text-sm sm:text-base">
+          Connect directly with our organization coordinator on WhatsApp for custom sponsorships, offline donations, or queries.
         </p>
         <div className="mt-7 flex justify-center">
           <CTAButton href={waLink} variant="whatsapp" icon={<WhatsAppIcon className="h-5 w-5" />}>
-            Donate via WhatsApp
+            Connect on WhatsApp
           </CTAButton>
         </div>
       </div>

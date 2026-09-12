@@ -23,3 +23,52 @@ h1, h2, h3, h4 {
   outline: 3px solid theme("colors.accent.DEFAULT");
   outline-offset: 2px;
 }
+
+@layer utilities {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+  
+  .glass-nav {
+    background: rgba(253, 248, 244, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .text-gradient-primary {
+    background: linear-gradient(135deg, #1B3A5C 0%, #E1638A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-rose {
+    background: linear-gradient(135deg, #E1638A 0%, #C24A6E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-mesh-pattern {
+    background-image: radial-gradient(rgba(225, 99, 138, 0.12) 1px, transparent 1px), radial-gradient(rgba(27, 58, 92, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+  }
+}
+
+/* Smooth custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FDF8F4;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+

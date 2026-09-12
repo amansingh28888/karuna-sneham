@@ -111,8 +111,143 @@ export const fallbackSettings: SiteSettings = {
 
   founder_image_url: null,
 
-  upi_id: null,
-  bank_details: null,
+  upi_id: "karunasneham@upi",
+  bank_details: "Karuna Sneham Foundation\nBank: State Bank of India\nA/C No: 40912839102\nIFSC: SBIN0001234\nBranch: Varanasi Main",
 
   updated_at: new Date().toISOString(),
 };
+
+export const fallbackPackages: Package[] = [
+  {
+    id: "pkg-1",
+    name: "Joyful Meal Celebration",
+    price: 1500,
+    description: "Provide fresh, nutritious meals and sweet treats to a group of 15 children for your special day.",
+    features: [
+      "Nutritious warm meal & sweet dessert",
+      "Personalized message banner for children",
+      "Photo & video updates via WhatsApp",
+      "Digital thank-you card",
+    ],
+    children_supported: 15,
+    image_url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop",
+    sort_order: 1,
+    active: true,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "pkg-2",
+    name: "Smile & Happiness Feast",
+    price: 3500,
+    description: "Our most popular package. Complete festive lunch, 3kg custom celebration cake, and music session.",
+    features: [
+      "Full festive lunch meal & fruit drink",
+      "3kg custom celebration cake cut with children",
+      "Interactive games & music celebration",
+      "Personalized video wish from the kids",
+      "Full HD Digital photo album",
+    ],
+    children_supported: 35,
+    image_url: "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?q=80&w=800&auto=format&fit=crop",
+    sort_order: 2,
+    active: true,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "pkg-3",
+    name: "Bright Future Celebration",
+    price: 7500,
+    description: "A transformative event providing gourmet celebration meals plus essential educational kit bags for 75 children.",
+    features: [
+      "Special gourmet celebration feast",
+      "Custom multi-tier cake & sweets distribution",
+      "Educational stationery kit & storybook for each child",
+      "Live WhatsApp video stream / call during cake cutting",
+      "Framed official certificate of appreciation",
+    ],
+    children_supported: 75,
+    image_url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop",
+    sort_order: 3,
+    active: true,
+    created_at: new Date().toISOString(),
+  },
+];
+
+export const fallbackImpact: ImpactStatistics = {
+  id: 1,
+  children_supported: 480,
+  events_organized: 74,
+  meals_distributed: 2850,
+  volunteers: 45,
+  updated_at: new Date().toISOString(),
+};
+
+export const fallbackTestimonials: Testimonial[] = [
+  {
+    id: "t-1",
+    name: "Priya & Rohit Sharma",
+    occasion: "5th Wedding Anniversary",
+    message: "Celebrating our anniversary with Karuna Sneham Foundation was the most fulfilling experience of our lives. Seeing 35 happy children singing and enjoying the feast warmed our hearts completely.",
+    published: true,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "t-2",
+    name: "Rohan Mehta",
+    occasion: "25th Birthday",
+    message: "Instead of spending money at a expensive restaurant, I decided to sponsor meals for 50 children. The video wish they sent me on WhatsApp was the best birthday gift I have ever received!",
+    published: true,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "t-3",
+    name: "Ananya Deshmukh",
+    occasion: "Mother's Birthday Memorial",
+    message: "Extremely transparent and heartfelt team. They executed the cake cutting and meal distribution beautifully and shared photos within hours. Highly recommended!",
+    published: true,
+    created_at: new Date().toISOString(),
+  },
+];
+
+export const fallbackGallery: GalleryItem[] = [
+  {
+    id: "g-1",
+    title: "Joyful Birthday Cake Cutting",
+    description: "Children gathering round to sing and celebrate sponsored birthday milestone.",
+    media_type: "image",
+    storage_path: "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?q=80&w=800&auto=format&fit=crop",
+    event_date: "2026-08-15",
+    published: true,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "g-2",
+    title: "Nutritious Festive Meals Service",
+    description: "Distributing freshly cooked nutritious lunch packs to underprivileged children.",
+    media_type: "image",
+    storage_path: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop",
+    event_date: "2026-08-01",
+    published: true,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "g-3",
+    title: "Educational Kit & Notebook Drive",
+    description: "Handing out school bags, notebooks, and stationery items during anniversary sponsor drive.",
+    media_type: "image",
+    storage_path: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop",
+    event_date: "2026-07-20",
+    published: true,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "g-4",
+    title: "Interactive Music & Games Fun",
+    description: "Children participating in drawing and singing games during festival celebration.",
+    media_type: "image",
+    storage_path: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=800&auto=format&fit=crop",
+    event_date: "2026-07-10",
+    published: true,
+    created_at: new Date().toISOString(),
+  },
+];

@@ -4,22 +4,18 @@ import ImpactStats from "@/components/ImpactStats";
 import PackageCard from "@/components/PackageCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTAButton from "@/components/CTAButton";
+import HowItWorksTimeline from "@/components/HowItWorksTimeline";
+import ImpactCalculator from "@/components/ImpactCalculator";
+import FAQSection from "@/components/FAQSection";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
 import {
   getSiteSettings,
   getActivePackages,
   getPublishedTestimonials,
   getImpactStatistics,
 } from "@/lib/data";
-
-const steps = [
-  { title: "Choose your occasion", body: "Birthday, anniversary, wedding, or any special day worth celebrating." },
-  { title: "Select a package", body: "Pick a celebration package that fits your budget and the impact you want to make." },
-  { title: "Message us on WhatsApp", body: "Tell us your date and package — we'll confirm every detail with you directly." },
-  { title: "We organise the celebration", body: "Our team hosts the celebration with children at our centre." },
-  { title: "Receive photos & videos", body: "We share memories from the day, and add them to our gallery with your permission." },
-];
 
 export default async function HomePage() {
   const [settings, packages, testimonials, impact] = await Promise.all([
@@ -28,47 +24,61 @@ export default async function HomePage() {
     getPublishedTestimonials(),
     getImpactStatistics(),
   ]);
+
   const waLink = buildWhatsAppLink(settings.whatsapp_number, settings.whatsapp_order_message);
   const featuredPackages = packages.slice(0, 3);
   const featuredTestimonials = testimonials.slice(0, 3);
 
   return (
     <>
+      {/* Animated Hero Section */}
       <Hero settings={settings} />
 
-      {/* About preview + impact */}
-      <section className="mx-auto max-w-6xl px-5 py-20 grid gap-10 lg:grid-cols-2 lg:items-center">
-        <SectionHeading
-          eyebrow="Who we are"
-          title="A home for smiles, built one celebration at a time"
-          description={`${settings.ngo_name} invites you to turn your special occasion — a birthday, an anniversary, any milestone — into a day of happiness for underprivileged children.`}
-        />
-        <ImpactStats stats={impact} />
-      </section>
-
-      {/* How it works */}
-      <section className="bg-surface py-20">
-        <div className="mx-auto max-w-6xl px-5">
-          <SectionHeading align="center" eyebrow="How it works" title="From your idea to a child's smile" />
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
-            {steps.map((s, i) => (
-              <div key={s.title} className="relative rounded-card bg-background p-6 shadow-warm">
-                <span className="font-display text-2xl text-secondary/60">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 font-display text-base text-primary">{s.title}</h3>
-                <p className="mt-2 text-sm text-ink-soft leading-relaxed">{s.body}</p>
-              </div>
-            ))}
+      {/* About Preview + Live Impact Counters */}
+      <section className="mx-auto max-w-6xl px-5 py-20 grid gap-12 lg:grid-cols-12 lg:items-center">
+        <div className="lg:col-span-6 space-y-4">
+          <SectionHeading
+            eyebrow="Who We Are"
+            title="A Home for Smiles, Built One Celebration at a Time"
+            description={`${settings.ngo_name} invites you to turn your special occasion — a birthday, an anniversary, or any personal milestone — into a day of sheer happiness for underprivileged children.`}
+          />
+          <p className="text-sm text-ink-soft leading-relaxed">
+            We handle everything: from ordering fresh multi-tier cakes and nutritious warm meal packs to conducting interactive games and delivering video proof directly to your phone.
+          </p>
+          <div className="pt-2">
+            <CTAButton href="/about" variant="secondary" icon={<ArrowRight className="h-4 w-4" />}>
+              Read Our Founder&apos;s Story
+            </CTAButton>
           </div>
+        </div>
+
+        <div className="lg:col-span-6">
+          <ImpactStats stats={impact} />
         </div>
       </section>
 
-      {/* Packages preview */}
+      {/* Interactive Process Timeline */}
+      <HowItWorksTimeline />
+
+      {/* Interactive Impact Calculator Simulator */}
+      <section className="mx-auto max-w-6xl px-5 py-16">
+        <ImpactCalculator whatsappNumber={settings.whatsapp_number} />
+      </section>
+
+      {/* Featured Celebration Packages */}
       {featuredPackages.length > 0 && (
         <section className="mx-auto max-w-6xl px-5 py-20">
-          <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
-            <SectionHeading eyebrow="Celebration packages" title="Choose how you'd like to give" />
-            <CTAButton href="/packages" variant="secondary">View all packages</CTAButton>
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
+            <SectionHeading
+              eyebrow="Celebration Packages"
+              title="Choose How You'd Like to Give"
+              description="Sponsor a party menu, cake, or educational kit bag tailored for children."
+            />
+            <CTAButton href="/packages" variant="secondary" icon={<ArrowRight className="h-4 w-4" />}>
+              Explore All Packages
+            </CTAButton>
           </div>
+
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {featuredPackages.map((p) => (
               <PackageCard key={p.id} pkg={p} whatsappNumber={settings.whatsapp_number} />
@@ -77,12 +87,17 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Testimonials */}
+      {/* Testimonials Showcase */}
       {featuredTestimonials.length > 0 && (
-        <section className="bg-surface py-20">
+        <section className="bg-surface py-20 border-y border-primary/5">
           <div className="mx-auto max-w-6xl px-5">
-            <SectionHeading align="center" eyebrow="In their words" title="Families who've celebrated with us" />
-            <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <SectionHeading
+              align="center"
+              eyebrow="Heartfelt Memories"
+              title="In the Words of Our Sponsors"
+              description="Read how families turn personal occasions into unforgettable days for children."
+            />
+            <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {featuredTestimonials.map((t) => (
                 <TestimonialCard key={t.id} t={t} />
               ))}
@@ -91,42 +106,65 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* WhatsApp CTA */}
-      <section className="mx-auto max-w-5xl px-5 py-20">
-        <div className="rounded-card bg-primary px-8 py-14 text-center text-white shadow-warm sm:px-16">
-          <h2 className="font-display text-3xl sm:text-4xl">
-            Turn your special day into a child&apos;s smile
-          </h2>
-          <p className="mt-4 text-white/80 max-w-xl mx-auto">
-            Message us on WhatsApp with your occasion and preferred package — we&apos;ll take care of the rest.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <CTAButton href={waLink} variant="whatsapp" icon={<WhatsAppIcon className="h-5 w-5" />}>
-              Book Your Order on WhatsApp
-            </CTAButton>
+      {/* Interactive FAQ Accordion */}
+      <FAQSection />
+
+      {/* Grand WhatsApp Call to Action Banner */}
+      <section className="mx-auto max-w-5xl px-5 py-16">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-slate-950 px-8 py-16 text-center text-white shadow-2xl sm:px-16 border border-white/10">
+          <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-secondary/20 blur-3xl pointer-events-none" />
+          <div className="relative z-10">
+            <span className="inline-block rounded-full bg-white/10 px-4 py-1 text-xs font-semibold text-secondary-light backdrop-blur-md mb-4 border border-white/10">
+              Ready to Share Happiness?
+            </span>
+            <h2 className="font-display text-3xl sm:text-5xl leading-tight">
+              Turn Your Milestone into a Child&apos;s Smile
+            </h2>
+            <p className="mt-4 text-white/80 max-w-xl mx-auto text-base sm:text-lg">
+              Message us on WhatsApp with your date and preferred package — our team will manage every detail with complete transparency.
+            </p>
+            <div className="mt-9 flex justify-center">
+              <CTAButton href={waLink} variant="whatsapp" icon={<WhatsAppIcon className="h-5 w-5" />}>
+                Book Your Order on WhatsApp
+              </CTAButton>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Contact preview */}
+      {/* Quick Contact & Visit Info Cards */}
       <section className="mx-auto max-w-6xl px-5 pb-24">
-        <SectionHeading align="center" eyebrow="Visit or reach us" title="We'd love to hear from you" />
-        <div className="mt-8 grid gap-6 sm:grid-cols-3 text-center">
-          <div className="rounded-card bg-surface p-6 shadow-warm">
-            <p className="text-sm text-ink-soft">Phone</p>
-            <p className="font-semibold text-primary">{settings.phone}</p>
+        <SectionHeading align="center" eyebrow="Visit & Connect" title="We'd Love to Hear From You" />
+        <div className="mt-10 grid gap-6 sm:grid-cols-3 text-center">
+          <div className="rounded-2xl bg-surface p-7 shadow-warm border border-primary/10 flex flex-col items-center">
+            <div className="h-10 w-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-3">
+              <Phone className="h-5 w-5" />
+            </div>
+            <p className="text-xs font-semibold text-ink-soft">Direct Phone</p>
+            <p className="font-display text-base font-bold text-primary mt-1">{settings.phone}</p>
           </div>
-          <div className="rounded-card bg-surface p-6 shadow-warm">
-            <p className="text-sm text-ink-soft">Email</p>
-            <p className="font-semibold text-primary">{settings.email}</p>
+
+          <div className="rounded-2xl bg-surface p-7 shadow-warm border border-primary/10 flex flex-col items-center">
+            <div className="h-10 w-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-3">
+              <Mail className="h-5 w-5" />
+            </div>
+            <p className="text-xs font-semibold text-ink-soft">Email Support</p>
+            <p className="font-display text-base font-bold text-primary mt-1">{settings.email}</p>
           </div>
-          <div className="rounded-card bg-surface p-6 shadow-warm">
-            <p className="text-sm text-ink-soft">Address</p>
-            <p className="font-semibold text-primary">{settings.address}</p>
+
+          <div className="rounded-2xl bg-surface p-7 shadow-warm border border-primary/10 flex flex-col items-center">
+            <div className="h-10 w-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-3">
+              <MapPin className="h-5 w-5" />
+            </div>
+            <p className="text-xs font-semibold text-ink-soft">Centre Address</p>
+            <p className="font-display text-xs font-semibold text-primary mt-1 line-clamp-2">{settings.address}</p>
           </div>
         </div>
+
         <div className="mt-8 flex justify-center">
-          <CTAButton href="/contact" variant="secondary">Get in touch</CTAButton>
+          <CTAButton href="/contact" variant="secondary" icon={<ArrowRight className="h-4 w-4" />}>
+            Get in Touch
+          </CTAButton>
         </div>
       </section>
     </>

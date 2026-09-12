@@ -48,9 +48,26 @@ const config: Config = {
       boxShadow: {
         warm: "0 12px 32px -12px rgba(27, 58, 92, 0.18)",
         soft: "0 8px 24px -10px rgba(225, 99, 138, 0.25)",
+        glow: "0 0 25px -5px rgba(225, 99, 138, 0.4)",
+        card: "0 10px 30px -5px rgba(27, 58, 92, 0.08)",
+        "card-hover": "0 20px 40px -10px rgba(27, 58, 92, 0.15)",
       },
       maxWidth: {
         prose: "68ch",
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        pulseGlow: {
+          "0%, 100%": { opacity: "1", transform: "scale(1)" },
+          "50%": { opacity: "0.85", transform: "scale(1.03)" },
+        },
+      },
+      animation: {
+        float: "float 6s ease-in-out infinite",
+        "pulse-glow": "pulseGlow 3s ease-in-out infinite",
       },
     },
   },
