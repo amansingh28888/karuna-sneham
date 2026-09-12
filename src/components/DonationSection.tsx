@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import confetti from "canvas-confetti";
-import { Copy, Check, QrCode, Heart, ShieldCheck, Sparkles, Smartphone } from "lucide-react";
+import { Copy, Check, QrCode, Heart, ShieldCheck, Sparkles, Smartphone, ExternalLink, ArrowUpRight } from "lucide-react";
 import CTAButton from "./CTAButton";
 import { WhatsAppIcon } from "./WhatsAppButton";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
@@ -44,6 +44,20 @@ export default function DonationSection({ upiId, whatsappNumber }: DonationSecti
     "en-IN"
   )} via UPI (${effectiveUpi}). Please share payment confirmation details.`;
   const waLink = buildWhatsAppLink(whatsappNumber, waMessage);
+
+  // Standard UPI URI scheme deep-link supported by PhonePe, GPay, Paytm, BHIM on Android & iOS
+  const genericUpiUrl = `upi://pay?pa=${encodeURIComponent(effectiveUpi)}&pn=${encodeURIComponent(
+    "Karuna Sneham Foundation"
+  )}&cu=INR&am=${selectedAmount}`;
+
+  const paymentApps = [
+    { name: "PhonePe", scheme: `phonepe://pay?pa=${encodeURIComponent(effectiveUpi)}&pn=${encodeURIComponent("Karuna Sneham Foundation")}&cu=INR&am=${selectedAmount}`, bg: "hover:bg-purple-600 hover:text-white hover:border-purple-600" },
+    { name: "Google Pay", scheme: `gpay://upi/pay?pa=${encodeURIComponent(effectiveUpi)}&pn=${encodeURIComponent("Karuna Sneham Foundation")}&cu=INR&am=${selectedAmount}`, bg: "hover:bg-blue-600 hover:text-white hover:border-blue-600" },
+    { name: "Paytm", scheme: `paytmmp://pay?pa=${encodeURIComponent(effectiveUpi)}&pn=${encodeURIComponent("Karuna Sneham Foundation")}&cu=INR&am=${selectedAmount}`, bg: "hover:bg-sky-500 hover:text-white hover:border-sky-500" },
+    { name: "BHIM UPI", scheme: genericUpiUrl, bg: "hover:bg-amber-600 hover:text-white hover:border-amber-600" },
+    { name: "Amazon Pay", scheme: genericUpiUrl, bg: "hover:bg-orange-500 hover:text-white hover:border-orange-500" },
+    { name: "WhatsApp Pay", scheme: genericUpiUrl, bg: "hover:bg-emerald-600 hover:text-white hover:border-emerald-600" },
+  ];
 
   return (
     <div className="space-y-12 max-w-5xl mx-auto">
@@ -108,7 +122,7 @@ export default function DonationSection({ upiId, whatsappNumber }: DonationSecti
         </div>
       </div>
 
-      {/* Payment Options: QR Code & Copy UPI ID */}
+      {/* Payment Options: QR Code & Direct Open UPI App */}
       <div className="grid gap-8 lg:grid-cols-12 items-stretch">
         {/* Left Column: Official Scan & Pay QR Poster */}
         <div className="lg:col-span-6 rounded-3xl bg-surface p-7 shadow-card border border-primary/10 flex flex-col items-center text-center justify-between">
@@ -118,7 +132,7 @@ export default function DonationSection({ upiId, whatsappNumber }: DonationSecti
             </div>
             <h4 className="font-display text-xl font-bold text-primary">Scan QR with Any Payment App</h4>
             <p className="text-xs text-ink-soft mt-1">
-              Supports Google Pay, PhonePe, Paytm, BHIM, Amazon Pay & WhatsApp Pay.
+              Supports PhonePe, Google Pay, Paytm, BHIM, Amazon Pay & WhatsApp Pay.
             </p>
 
             <div className="relative mt-6 mx-auto w-full max-w-sm overflow-hidden rounded-2xl border-2 border-primary/10 bg-white p-2 shadow-warm">
@@ -138,54 +152,73 @@ export default function DonationSection({ upiId, whatsappNumber }: DonationSecti
           </p>
         </div>
 
-        {/* Right Column: Copy UPI ID & Mobile Apps Card */}
+        {/* Right Column: Clickable App Launchers & Copy VPA Card */}
         <div className="lg:col-span-6 rounded-3xl bg-surface p-7 shadow-card border border-primary/10 flex flex-col justify-between space-y-6">
           <div>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2 text-primary font-display text-lg font-bold">
-                <Smartphone className="h-5 w-5 text-secondary" /> Direct UPI ID Payment
+                <Smartphone className="h-5 w-5 text-secondary" /> Direct UPI App Payment
               </div>
               <span className="rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 text-xs font-bold border border-emerald-200">
-                Instant Transfer
+                Instant Open
               </span>
             </div>
 
-            <p className="text-xs text-ink-soft leading-relaxed">
-              If you prefer paying by entering the UPI ID directly in your payment app, copy our official UPI VPA below:
+            <p className="text-xs text-ink-soft leading-relaxed mb-4">
+              Click below to immediately launch PhonePe, Google Pay, Paytm, or any installed UPI app on your phone:
             </p>
 
-            <div className="mt-5 rounded-2xl bg-background p-5 border border-primary/15 space-y-3">
-              <span className="text-xs font-semibold text-ink-soft uppercase tracking-wider block">Official UPI VPA</span>
+            {/* Prominent Direct Open Any UPI App Button */}
+            <a
+              href={genericUpiUrl}
+              onClick={triggerConfetti}
+              className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-primary-light px-6 py-3.5 text-sm font-bold text-white shadow-soft transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <ExternalLink className="h-4 w-4" /> Open in PhonePe / GPay / Any UPI App (₹{selectedAmount.toLocaleString("en-IN")})
+            </a>
+
+            {/* Clickable Apps Chips Grid */}
+            <div className="mt-6 pt-5 border-t border-primary/10">
+              <span className="text-xs font-bold text-primary block mb-3">
+                Click Your Preferred App to Pay ₹{selectedAmount.toLocaleString("en-IN")}:
+              </span>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                {paymentApps.map((app) => (
+                  <a
+                    key={app.name}
+                    href={app.scheme}
+                    onClick={triggerConfetti}
+                    className={`flex items-center justify-between rounded-xl bg-background px-3.5 py-2.5 text-xs font-bold text-ink border border-primary/15 transition-all shadow-sm ${app.bg}`}
+                  >
+                    <span>{app.name}</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 opacity-60" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Copy VPA Section */}
+            <div className="mt-6 rounded-2xl bg-background p-4 border border-primary/15 space-y-2">
+              <span className="text-xs font-semibold text-ink-soft uppercase tracking-wider block">Or Copy UPI VPA Manually</span>
               <div className="flex items-center justify-between gap-3">
-                <code className="font-mono text-sm sm:text-base font-bold text-primary break-all">
+                <code className="font-mono text-sm font-bold text-primary break-all">
                   {effectiveUpi}
                 </code>
                 <button
                   onClick={() => copyText(effectiveUpi)}
-                  className="flex shrink-0 items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-white transition-all hover:bg-primary-light active:scale-95 shadow-soft"
+                  className="flex shrink-0 items-center gap-1.5 rounded-xl bg-primary px-3.5 py-1.5 text-xs font-semibold text-white transition-all hover:bg-primary-light active:scale-95 shadow-soft"
                 >
                   {copiedUpi ? (
                     <>
-                      <Check className="h-4 w-4 text-emerald-400" /> Copied!
+                      <Check className="h-3.5 w-3.5 text-emerald-400" /> Copied
                     </>
                   ) : (
                     <>
-                      <Copy className="h-4 w-4" /> Copy ID
+                      <Copy className="h-3.5 w-3.5" /> Copy
                     </>
                   )}
                 </button>
-              </div>
-            </div>
-
-            {/* Supported payment icons badge */}
-            <div className="mt-6 pt-5 border-t border-primary/10">
-              <span className="text-xs font-semibold text-primary block mb-3">Compatible Payment Apps:</span>
-              <div className="flex flex-wrap gap-2 text-xs font-semibold text-ink-soft">
-                {["BHIM UPI", "Google Pay", "PhonePe", "Paytm", "Amazon Pay", "TimePay", "WhatsApp"].map((app) => (
-                  <span key={app} className="rounded-lg bg-background px-3 py-1.5 border border-primary/10">
-                    {app}
-                  </span>
-                ))}
               </div>
             </div>
           </div>
@@ -193,7 +226,7 @@ export default function DonationSection({ upiId, whatsappNumber }: DonationSecti
           <div className="rounded-2xl bg-secondary/10 p-4 border border-secondary/20 flex items-center gap-3">
             <Sparkles className="h-5 w-5 text-secondary shrink-0" />
             <p className="text-xs text-ink-soft leading-snug">
-              After making your payment, send a quick screenshot on WhatsApp to receive your official digital acknowledgement!
+              After payment, share a screenshot on WhatsApp for your digital receipt!
             </p>
           </div>
         </div>
