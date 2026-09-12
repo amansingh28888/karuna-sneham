@@ -111,8 +111,8 @@ export const fallbackSettings: SiteSettings = {
 
   founder_image_url: null,
 
-  upi_id: "karunasneham@upi",
-  bank_details: "Karuna Sneham Foundation\nBank: State Bank of India\nA/C No: 40912839102\nIFSC: SBIN0001234\nBranch: Varanasi Main",
+  upi_id: "UJJ83981816501@Ujjivan",
+  bank_details: null,
 
   updated_at: new Date().toISOString(),
 };

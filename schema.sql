@@ -211,7 +211,7 @@ create policy "site_settings: admin write"
 -- 9296804691 is not the right one to receive orders on.
 insert into public.site_settings (
   id, ngo_name, tagline, cin, founded_date, phone, email, address, map_link,
-  whatsapp_number, instagram_link,
+  whatsapp_number, instagram_link, upi_id, bank_details,
   founder_name, founder_role, founder_bio
 ) values (
   1,
@@ -225,6 +225,8 @@ insert into public.site_settings (
   'https://share.google/Y1c8ioOVTg6BjOcnW',
   '919296804691',
   'https://www.instagram.com/karunasneham.ngo',
+  'UJJ83981816501@Ujjivan',
+  null,
   'Aman Singh',
   'Founder, Karuna Sneham Foundation',
   'Aman Singh is the founder of Karuna Sneham Foundation, driven by a passion for creating meaningful social impact and bringing happiness to underprivileged children and communities. Alongside his work with the foundation, Aman is pursuing an MBA in Business Analytics at Chandigarh University, where he is developing his expertise in data analytics, business strategy, technology, and problem-solving. He believes that meaningful change happens when compassion is combined with action. Through Karuna Sneham Foundation, he aims to create opportunities for individuals to turn their special moments — such as birthdays and anniversaries — into moments of happiness for children in need. "A celebration becomes more meaningful when it brings a smile to someone who needs it."'

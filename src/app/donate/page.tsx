@@ -30,7 +30,6 @@ export default async function DonatePage() {
       {/* Interactive Donation Section */}
       <DonationSection
         upiId={settings.upi_id}
-        bankDetails={settings.bank_details}
         whatsappNumber={settings.whatsapp_number}
       />
 
