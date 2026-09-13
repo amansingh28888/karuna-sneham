@@ -171,29 +171,30 @@ export default function QuickBookingModal({
                       return (
                         <label
                           key={pkg.id}
-                          className={`flex items-center justify-between rounded-xl p-3 border cursor-pointer transition-all duration-150 ${
+                          className={`flex items-start gap-3 rounded-xl p-3 border cursor-pointer transition-all duration-150 ${
                             isSelected
                               ? "border-secondary bg-secondary/6 shadow-soft"
                               : "border-primary/10 bg-surface hover:border-secondary/30 hover:bg-secondary/3"
                           }`}
                         >
-                          <div className="flex items-center gap-3 min-w-0">
-                            <input
-                              type="radio"
-                              name="package"
-                              value={pkg.id}
-                              checked={isSelected}
-                              onChange={() => setSelectedPkgId(pkg.id)}
-                              className="accent-secondary shrink-0"
-                            />
-                            <div className="min-w-0">
-                              <p className="text-sm font-medium text-primary truncate">{pkg.name}</p>
-                              <p className="text-xs text-ink-soft">
-                                Supports {pkg.children_supported} children
-                              </p>
-                            </div>
+                          {/* Radio */}
+                          <input
+                            type="radio"
+                            name="package"
+                            value={pkg.id}
+                            checked={isSelected}
+                            onChange={() => setSelectedPkgId(pkg.id)}
+                            className="accent-secondary shrink-0 mt-1"
+                          />
+                          {/* Name + subtitle */}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-primary leading-snug">{pkg.name}</p>
+                            <p className="text-xs text-ink-soft mt-0.5">
+                              Supports {pkg.children_supported} children
+                            </p>
                           </div>
-                          <span className="font-display text-sm font-bold text-secondary shrink-0 ml-3">
+                          {/* Price — always right-aligned, wraps to new line gracefully */}
+                          <span className="font-display text-sm font-bold text-secondary shrink-0 mt-0.5">
                             ₹{pkg.price.toLocaleString("en-IN")}
                           </span>
                         </label>

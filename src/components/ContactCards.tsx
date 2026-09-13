@@ -1,23 +1,36 @@
 "use client";
 
 import { Phone, Mail, MapPin } from "lucide-react";
+import { fallbackSettings } from "@/lib/types";
 
-const contactItems = [
+interface ContactItem {
+  icon: typeof Phone;
+  label: string;
+  key: string;
+  iconBg: string;
+  small?: boolean;
+}
+
+const contactItems: ContactItem[] = [
   { icon: Phone,  label: "Direct Phone",   key: "phone",   iconBg: "bg-rose-50 text-rose-500 border-rose-100" },
   { icon: Mail,   label: "Email Support",  key: "email",   iconBg: "bg-sky-50 text-sky-500 border-sky-100" },
   { icon: MapPin, label: "Centre Address", key: "address", iconBg: "bg-violet-50 text-violet-500 border-violet-100", small: true },
-] as const;
+];
 
 export default function ContactCards({
   phone,
   email,
   address,
 }: {
-  phone: string;
-  email: string;
-  address: string;
+  phone?: string | null;
+  email?: string | null;
+  address?: string | null;
 }) {
-  const values: Record<string, string> = { phone, email, address };
+  const values: Record<string, string> = {
+    phone: phone || fallbackSettings.phone || "",
+    email: email || fallbackSettings.email || "",
+    address: address || fallbackSettings.address || "",
+  };
 
   return (
     <div className="mt-10 grid gap-6 sm:grid-cols-3 text-center">
