@@ -5,11 +5,11 @@ type Variant = "primary" | "secondary" | "whatsapp";
 
 const styles: Record<Variant, string> = {
   primary:
-    "bg-cta text-white hover:bg-cta-hover shadow-soft",
+    "bg-cta text-white hover:bg-cta-hover shadow-soft hover:shadow-[0_8px_28px_-4px_rgba(225,99,138,0.45)]",
   secondary:
-    "bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-white",
+    "bg-transparent text-primary border-2 border-primary/70 hover:bg-primary hover:text-white hover:border-primary",
   whatsapp:
-    "bg-whatsapp text-white hover:bg-whatsapp-hover shadow-soft",
+    "bg-whatsapp text-white hover:bg-whatsapp-hover shadow-soft hover:shadow-[0_8px_28px_-4px_rgba(37,211,102,0.4)]",
 };
 
 export default function CTAButton({
@@ -26,7 +26,7 @@ export default function CTAButton({
   className?: string;
 }) {
   const isExternal = href.startsWith("http");
-  const classes = `inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold text-base transition-colors duration-200 ${styles[variant]} ${className}`;
+  const classes = `inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold text-base transition-all duration-200 ${styles[variant]} ${className}`;
 
   if (isExternal) {
     return (

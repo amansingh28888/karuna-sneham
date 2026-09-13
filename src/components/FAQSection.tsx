@@ -31,9 +31,7 @@ const faqs = [
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const toggle = (idx: number) => {
-    setOpenIndex(openIndex === idx ? null : idx);
-  };
+  const toggle = (idx: number) => setOpenIndex(openIndex === idx ? null : idx);
 
   return (
     <section className="mx-auto max-w-4xl px-5 py-20">
@@ -44,30 +42,41 @@ export default function FAQSection() {
         description="Everything you need to know about sponsoring celebrations and making a direct impact."
       />
 
-      <div className="mt-12 space-y-4">
+      <div className="mt-12 space-y-3">
         {faqs.map((faq, idx) => {
           const isOpen = openIndex === idx;
           return (
-            <div
+            <motion.div
               key={faq.question}
-              className="overflow-hidden rounded-2xl bg-surface border border-primary/10 shadow-warm transition-all duration-300 hover:border-primary/25"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: idx * 0.05 }}
+              className={`overflow-hidden rounded-2xl bg-surface border transition-colors duration-200 ${
+                isOpen
+                  ? "border-secondary/30 shadow-soft"
+                  : "border-primary/8 shadow-warm hover:border-primary/20"
+              }`}
             >
-              <button
-                onClick={() => toggle(idx)}
-                className="flex w-full items-center justify-between p-6 text-left focus:outline-none"
-              >
-                <span className="flex items-center gap-3 font-display text-base sm:text-lg text-primary font-medium">
-                  <HelpCircle className="h-5 w-5 text-secondary shrink-0" />
-                  {faq.question}
-                </span>
-                <motion.span
-                  animate={{ rotate: isOpen ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="rounded-full bg-background p-1.5 text-primary shrink-0 ml-4"
+              {/* Left accent bar */}
+              <div className={`flex transition-all duration-200 ${isOpen ? "border-l-2 border-secondary" : "border-l-2 border-transparent"}`}>
+                <button
+                  onClick={() => toggle(idx)}
+                  className="flex w-full items-center justify-between px-6 py-5 text-left focus:outline-none"
                 >
-                  <ChevronDown className="h-5 w-5" />
-                </motion.span>
-              </button>
+                  <span className="flex items-center gap-3 font-display text-sm sm:text-base text-primary font-medium pr-4">
+                    <HelpCircle className={`h-4 w-4 shrink-0 transition-colors ${isOpen ? "text-secondary" : "text-secondary/60"}`} />
+                    {faq.question}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className={`shrink-0 rounded-full p-1.5 transition-colors ${isOpen ? "bg-secondary/10 text-secondary" : "bg-background text-primary"}`}
+                  >
+                    <ChevronDown className="h-4 w-4" />
+                  </motion.div>
+                </button>
+              </div>
 
               <AnimatePresence initial={false}>
                 {isOpen && (
@@ -75,15 +84,15 @@ export default function FAQSection() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    transition={{ duration: 0.28, ease: "easeInOut" }}
                   >
-                    <div className="px-6 pb-6 pt-2 text-sm sm:text-base text-ink-soft leading-relaxed border-t border-primary/5">
+                    <div className="px-6 pb-6 text-sm sm:text-base text-ink-soft leading-relaxed border-t border-primary/5 pt-3 ml-2">
                       {faq.answer}
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           );
         })}
       </div>

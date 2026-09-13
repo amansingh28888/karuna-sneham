@@ -12,17 +12,26 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
   const waLink = buildWhatsAppLink(settings.whatsapp_number, settings.whatsapp_order_message);
 
   return (
-    <section className="relative overflow-hidden bg-background bg-mesh-pattern pt-8 pb-16 lg:pt-14 lg:pb-24">
-      {/* Decorative ambient background glows */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-secondary/10 blur-3xl pointer-events-none" />
-      <div className="absolute top-40 right-10 h-72 w-72 rounded-full bg-accent/15 blur-3xl pointer-events-none" />
+    <section className="relative overflow-hidden bg-background pt-8 pb-16 lg:pt-14 lg:pb-24">
+      {/* Warm ambient blobs — soft, not neon */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-[600px] rounded-full bg-secondary/8 blur-[100px] pointer-events-none" />
+      <div className="absolute top-40 right-0 h-80 w-80 rounded-full bg-accent/10 blur-[80px] pointer-events-none" />
+
+      {/* Subtle dot-grid texture */}
+      <div
+        className="absolute inset-0 opacity-[0.035] pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle, #1B3A5C 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
 
       <div className="mx-auto max-w-6xl px-5 relative z-10 grid gap-12 lg:grid-cols-12 lg:items-center">
-        {/* Left Column: Heading & Content */}
+        {/* Left Column */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="lg:col-span-7"
         >
           {/* Organization Pill Badge */}
@@ -40,9 +49,9 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
             </span>
           </div>
 
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.12] text-primary">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.75rem] leading-[1.1] text-primary">
             Turn your special day into
-            <span className="block text-gradient-rose">a child&apos;s happiest memory.</span>
+            <span className="block text-gradient-rose mt-1">a child&apos;s happiest memory.</span>
           </h1>
 
           <p className="mt-6 text-base sm:text-lg text-ink-soft leading-relaxed max-w-xl">
@@ -52,14 +61,14 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
           {/* Action CTAs */}
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <CTAButton href={waLink} variant="whatsapp" icon={<WhatsAppIcon className="h-5 w-5" />}>
-              Book Your Order on WhatsApp
+              Book on WhatsApp
             </CTAButton>
             <CTAButton href="/packages" variant="secondary" icon={<ArrowRight className="h-4 w-4" />}>
               View Packages
             </CTAButton>
           </div>
 
-          {/* Social Proof / Avatars Stack */}
+          {/* Social Proof */}
           <div className="mt-10 flex items-center gap-4 pt-6 border-t border-primary/10">
             <div className="flex -space-x-3">
               {[
@@ -79,66 +88,66 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
               ))}
             </div>
             <div className="text-xs text-ink-soft">
-              <span className="font-semibold text-primary">100+ Sponsors</span> have shared their happiness with our kids this year.
+              <span className="font-semibold text-primary">100+ Sponsors</span> have shared their
+              happiness with our kids this year.
             </div>
           </div>
         </motion.div>
 
-        {/* Right Column: Hero Visual Stack */}
+        {/* Right Column: Hero Image */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
           className="lg:col-span-5 relative"
         >
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-card border border-primary/10 group">
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-[0_32px_64px_-16px_rgba(27,58,92,0.22)] border border-primary/8 group">
             <Image
               src="/children.jpeg"
               alt="Children celebrating together"
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               priority
             />
-            {/* Soft gradient overlay at bottom */}
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/75 via-primary/10 to-transparent" />
 
             <div className="absolute bottom-6 left-6 right-6 text-white">
-              <p className="text-xs font-semibold uppercase tracking-wider text-secondary-light">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-secondary-light/90 mb-1">
                 Impact in Action
               </p>
-              <p className="font-display text-xl font-medium mt-1">
+              <p className="font-display text-lg font-medium leading-snug">
                 &ldquo;A celebration becomes meaningful when it brings a smile to someone in need.&rdquo;
               </p>
             </div>
           </div>
 
-          {/* Floating Badge 1: Smiles Created */}
+          {/* Floating Badge 1 */}
           <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-4 -left-4 sm:-left-6 glass-card rounded-2xl p-4 shadow-warm flex items-center gap-3 border border-white/80 max-w-[200px]"
+            animate={{ y: [0, -7, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-5 -left-5 sm:-left-7 glass-card rounded-2xl p-4 shadow-warm border border-white/80 flex items-center gap-3 max-w-[190px]"
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rose-500/15 text-rose-600">
-              <Heart className="h-5 w-5 fill-rose-500" />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rose-50 text-rose-500 shadow-[0_4px_12px_rgba(225,99,138,0.25)]">
+              <Heart className="h-5 w-5 fill-rose-400" />
             </div>
             <div>
-              <p className="font-display text-lg font-bold text-primary">480+ Kids</p>
-              <p className="text-[11px] text-ink-soft leading-tight">Smiles Created</p>
+              <p className="font-display text-lg font-bold text-primary leading-none">480+ Kids</p>
+              <p className="text-[11px] text-ink-soft mt-0.5">Smiles Created</p>
             </div>
           </motion.div>
 
-          {/* Floating Badge 2: Verified Photos */}
+          {/* Floating Badge 2 */}
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute -bottom-4 -right-4 sm:-right-6 glass-card rounded-2xl p-4 shadow-warm flex items-center gap-3 border border-white/80 max-w-[210px]"
+            animate={{ y: [0, 7, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+            className="absolute -bottom-5 -right-5 sm:-right-7 glass-card rounded-2xl p-4 shadow-warm border border-white/80 flex items-center gap-3 max-w-[205px]"
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-600">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 shadow-[0_4px_12px_rgba(16,185,129,0.2)]">
               <Sparkles className="h-5 w-5" />
             </div>
             <div>
-              <p className="font-display text-base font-bold text-primary">Direct HD Photos</p>
-              <p className="text-[11px] text-ink-soft leading-tight">Sent to your WhatsApp</p>
+              <p className="font-display text-sm font-bold text-primary leading-none">Direct HD Photos</p>
+              <p className="text-[11px] text-ink-soft mt-0.5">Sent to your WhatsApp</p>
             </div>
           </motion.div>
         </motion.div>

@@ -20,55 +20,96 @@ h1, h2, h3, h4 {
 }
 
 *:focus-visible {
-  outline: 3px solid theme("colors.accent.DEFAULT");
-  outline-offset: 2px;
+  outline: 2px solid theme("colors.secondary.DEFAULT");
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 @layer utilities {
+  /* ---------- Glassmorphism ---------- */
   .glass-card {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-  }
-  
-  .glass-nav {
-    background: rgba(253, 248, 244, 0.88);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.65);
   }
 
+  .glass-nav {
+    background: rgba(253, 248, 244, 0.92);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  /* ---------- Text Gradients ---------- */
   .text-gradient-primary {
     background: linear-gradient(135deg, #1B3A5C 0%, #E1638A 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .text-gradient-rose {
     background: linear-gradient(135deg, #E1638A 0%, #C24A6E 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
+  /* ---------- Background Patterns ---------- */
   .bg-mesh-pattern {
-    background-image: radial-gradient(rgba(225, 99, 138, 0.12) 1px, transparent 1px), radial-gradient(rgba(27, 58, 92, 0.08) 1px, transparent 1px);
-    background-size: 24px 24px;
-    background-position: 0 0, 12px 12px;
+    background-image:
+      radial-gradient(rgba(225, 99, 138, 0.1) 1px, transparent 1px),
+      radial-gradient(rgba(27, 58, 92, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: 0 0, 14px 14px;
   }
 }
 
-/* Smooth custom scrollbars */
+/* ---------- Scrollbar ---------- */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #FDF8F4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #D4A5B5;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #C24A6E;
 }
 
+/* ---------- Range input (slider) styling ---------- */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.22);
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #E1638A;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(225, 99, 138, 0.4);
+  cursor: pointer;
+  transition: box-shadow 0.15s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 4px 16px rgba(225, 99, 138, 0.6);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #E1638A;
+  border: 2px solid #fff;
+  cursor: pointer;
+}

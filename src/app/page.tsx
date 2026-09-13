@@ -7,9 +7,10 @@ import CTAButton from "@/components/CTAButton";
 import HowItWorksTimeline from "@/components/HowItWorksTimeline";
 import ImpactCalculator from "@/components/ImpactCalculator";
 import FAQSection from "@/components/FAQSection";
+import ContactCards from "@/components/ContactCards";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
-import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import {
   getSiteSettings,
   getActivePackages,
@@ -31,7 +32,7 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Animated Hero Section */}
+      {/* Hero */}
       <Hero settings={settings} />
 
       {/* About Preview + Live Impact Counters */}
@@ -51,21 +52,20 @@ export default async function HomePage() {
             </CTAButton>
           </div>
         </div>
-
         <div className="lg:col-span-6">
           <ImpactStats stats={impact} />
         </div>
       </section>
 
-      {/* Interactive Process Timeline */}
+      {/* How It Works */}
       <HowItWorksTimeline />
 
-      {/* Interactive Impact Calculator Simulator */}
+      {/* Impact Calculator */}
       <section className="mx-auto max-w-6xl px-5 py-16">
         <ImpactCalculator whatsappNumber={settings.whatsapp_number} />
       </section>
 
-      {/* Featured Celebration Packages */}
+      {/* Packages */}
       {featuredPackages.length > 0 && (
         <section className="mx-auto max-w-6xl px-5 py-20">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
@@ -78,7 +78,6 @@ export default async function HomePage() {
               Explore All Packages
             </CTAButton>
           </div>
-
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {featuredPackages.map((p) => (
               <PackageCard key={p.id} pkg={p} whatsappNumber={settings.whatsapp_number} />
@@ -87,7 +86,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Testimonials Showcase */}
+      {/* Testimonials */}
       {featuredTestimonials.length > 0 && (
         <section className="bg-surface py-20 border-y border-primary/5">
           <div className="mx-auto max-w-6xl px-5">
@@ -106,21 +105,22 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Interactive FAQ Accordion */}
+      {/* FAQ */}
       <FAQSection />
 
-      {/* Grand WhatsApp Call to Action Banner */}
+      {/* CTA Banner */}
       <section className="mx-auto max-w-5xl px-5 py-16">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-slate-950 px-8 py-16 text-center text-white shadow-2xl sm:px-16 border border-white/10">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-slate-950 px-8 py-16 text-center text-white shadow-2xl sm:px-16">
           <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-secondary/20 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
           <div className="relative z-10">
-            <span className="inline-block rounded-full bg-white/10 px-4 py-1 text-xs font-semibold text-secondary-light backdrop-blur-md mb-4 border border-white/10">
+            <span className="inline-block rounded-full bg-white/10 border border-white/15 px-4 py-1 text-xs font-semibold text-secondary-light backdrop-blur-md mb-5">
               Ready to Share Happiness?
             </span>
             <h2 className="font-display text-3xl sm:text-5xl leading-tight">
               Turn Your Milestone into a Child&apos;s Smile
             </h2>
-            <p className="mt-4 text-white/80 max-w-xl mx-auto text-base sm:text-lg">
+            <p className="mt-4 text-white/75 max-w-xl mx-auto text-base sm:text-lg leading-relaxed">
               Message us on WhatsApp with your date and preferred package — our team will manage every detail with complete transparency.
             </p>
             <div className="mt-9 flex justify-center">
@@ -132,35 +132,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Quick Contact & Visit Info Cards */}
+      {/* Contact Cards */}
       <section className="mx-auto max-w-6xl px-5 pb-24">
         <SectionHeading align="center" eyebrow="Visit & Connect" title="We'd Love to Hear From You" />
-        <div className="mt-10 grid gap-6 sm:grid-cols-3 text-center">
-          <div className="rounded-2xl bg-surface p-7 shadow-warm border border-primary/10 flex flex-col items-center">
-            <div className="h-10 w-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-3">
-              <Phone className="h-5 w-5" />
-            </div>
-            <p className="text-xs font-semibold text-ink-soft">Direct Phone</p>
-            <p className="font-display text-base font-bold text-primary mt-1">{settings.phone}</p>
-          </div>
-
-          <div className="rounded-2xl bg-surface p-7 shadow-warm border border-primary/10 flex flex-col items-center">
-            <div className="h-10 w-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-3">
-              <Mail className="h-5 w-5" />
-            </div>
-            <p className="text-xs font-semibold text-ink-soft">Email Support</p>
-            <p className="font-display text-base font-bold text-primary mt-1">{settings.email}</p>
-          </div>
-
-          <div className="rounded-2xl bg-surface p-7 shadow-warm border border-primary/10 flex flex-col items-center">
-            <div className="h-10 w-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-3">
-              <MapPin className="h-5 w-5" />
-            </div>
-            <p className="text-xs font-semibold text-ink-soft">Centre Address</p>
-            <p className="font-display text-xs font-semibold text-primary mt-1 line-clamp-2">{settings.address}</p>
-          </div>
-        </div>
-
+        <ContactCards
+          phone={settings.phone}
+          email={settings.email}
+          address={settings.address}
+        />
         <div className="mt-8 flex justify-center">
           <CTAButton href="/contact" variant="secondary" icon={<ArrowRight className="h-4 w-4" />}>
             Get in Touch
