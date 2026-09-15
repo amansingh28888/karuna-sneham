@@ -2,7 +2,10 @@ import SectionHeading from "@/components/SectionHeading";
 import ContactForm from "./ContactForm";
 import { getSiteSettings } from "@/lib/data";
 
-export const metadata = { title: "Contact | Karuna Sneham Foundation" };
+export const metadata = {
+  title: "Contact Us | NGO in Varanasi",
+  description: "Contact Karuna Sneham Foundation, an NGO in Varanasi. Reach out to donate, celebrate a birthday with children, or support our causes.",
+};
 
 export default async function ContactPage() {
   const settings = await getSiteSettings();
@@ -10,8 +13,30 @@ export default async function ContactPage() {
     ? `https://www.google.com/maps?q=${encodeURIComponent(settings.address ?? "")}&output=embed`
     : undefined;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: settings.ngo_name,
+    image: "https://karunasneham.org/logo-cropped.jpeg",
+    "@id": "https://karunasneham.org",
+    url: "https://karunasneham.org/contact",
+    telephone: settings.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: settings.address,
+      addressLocality: "Varanasi",
+      addressRegion: "Uttar Pradesh",
+      postalCode: "221108",
+      addressCountry: "IN"
+    }
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-5 py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SectionHeading
         align="center"
         eyebrow="Get in touch"

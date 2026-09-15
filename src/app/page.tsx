@@ -40,7 +40,7 @@ export default async function HomePage() {
         <div className="lg:col-span-6 space-y-4">
           <SectionHeading
             eyebrow="Who We Are"
-            title="A Home for Smiles, Built One Celebration at a Time"
+            title="A Home for Smiles — Trusted NGO for Children's Welfare"
             description={`${settings.ngo_name} invites you to turn your special occasion — a birthday, an anniversary, or any personal milestone — into a day of sheer happiness for underprivileged children.`}
           />
           <p className="text-sm text-ink-soft leading-relaxed">
@@ -71,8 +71,8 @@ export default async function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
             <SectionHeading
               eyebrow="Celebration Packages"
-              title="Choose How You'd Like to Give"
-              description="Sponsor a party menu, cake, or educational kit bag tailored for children."
+              title="Donation Packages for Children — Choose How You'd Like to Give"
+              description="Sponsor a party menu, cake, or educational kit bag tailored for underprivileged children through our NGO packages."
             />
             <CTAButton href="/packages" variant="secondary" icon={<ArrowRight className="h-4 w-4" />}>
               Explore All Packages
@@ -134,7 +134,7 @@ export default async function HomePage() {
 
       {/* Contact Cards */}
       <section className="mx-auto max-w-6xl px-5 pb-24">
-        <SectionHeading align="center" eyebrow="Visit & Connect" title="We'd Love to Hear From You" />
+        <SectionHeading align="center" eyebrow="Visit & Connect" title="Contact Our NGO in Varanasi — We'd Love to Hear From You" />
         <ContactCards
           phone={settings.phone}
           email={settings.email}

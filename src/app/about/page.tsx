@@ -3,7 +3,10 @@ import SectionHeading from "@/components/SectionHeading";
 import { getSiteSettings } from "@/lib/data";
 import { Heart, Target, Compass, Award, ShieldCheck, Sparkles, CheckCircle2 } from "lucide-react";
 
-export const metadata = { title: "About Us | Karuna Sneham Foundation" };
+export const metadata = {
+  title: "About Us | Best NGO for Children in India",
+  description: "Learn about Karuna Sneham Foundation, a top NGO in India dedicated to underprivileged children, child education, and spreading happiness through donation drives.",
+};
 
 export default async function AboutPage() {
   const settings = await getSiteSettings();

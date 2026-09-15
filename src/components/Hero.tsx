@@ -38,7 +38,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
           <div className="mb-6 inline-flex items-center gap-3 rounded-full bg-surface px-4 py-2 shadow-warm border border-primary/10">
             <Image
               src="/logo-cropped.jpeg"
-              alt="Karuna Sneham Foundation logo"
+              alt="Karuna Sneham Foundation - Best NGO for Children Logo"
               width={28}
               height={28}
               className="h-7 w-7 rounded-full object-contain"
@@ -51,7 +51,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
 
           <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.75rem] leading-[1.1] text-primary">
             Turn your special day into
-            <span className="block text-gradient-rose mt-1">a child&apos;s happiest memory.</span>
+            <span className="block text-gradient-rose mt-1">a child&apos;s happiest memory with our NGO.</span>
           </h1>
 
           <p className="mt-6 text-base sm:text-lg text-ink-soft leading-relaxed max-w-xl">
@@ -104,7 +104,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-[0_32px_64px_-16px_rgba(27,58,92,0.22)] border border-primary/8 group">
             <Image
               src="/children.jpeg"
-              alt="Children celebrating together"
+              alt="Underprivileged children celebrating with Karuna Sneham Foundation NGO"
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               priority

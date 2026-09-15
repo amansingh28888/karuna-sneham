@@ -7,7 +7,10 @@ import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { getSiteSettings, getImpactStatistics } from "@/lib/data";
 import { ShieldCheck, Heart, Sparkles, CheckCircle2 } from "lucide-react";
 
-export const metadata = { title: "Donate & Support | Karuna Sneham Foundation" };
+export const metadata = {
+  title: "Donate & Support | Donate to NGO for Children",
+  description: "Make an online NGO donation to Karuna Sneham Foundation. Support child education, sponsor meals, and help underprivileged children have a brighter future.",
+};
 
 export default async function DonatePage() {
   const [settings, impact] = await Promise.all([getSiteSettings(), getImpactStatistics()]);
