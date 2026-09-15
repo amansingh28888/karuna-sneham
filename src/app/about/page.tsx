@@ -20,7 +20,7 @@ export default async function AboutPage() {
       {/* Hero Banner Image */}
       <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl shadow-card border border-primary/10 group">
         <Image
-          src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1400&auto=format&fit=crop"
+          src="/group.jpeg"
           alt="Children at a Karuna Sneham Foundation gathering"
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
