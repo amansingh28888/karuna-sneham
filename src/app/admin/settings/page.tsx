@@ -84,6 +84,57 @@ export default function AdminSettingsPage() {
             <input type="file" accept="image/*" onChange={(e) => e.target.files?.[0] && handleFounderPhoto(e.target.files[0])} className="text-sm" />
             {uploading && <p className="text-xs text-ink-soft mt-1">Uploading…</p>}
           </Row>
+
+          <hr className="my-6 border-primary/10" />
+
+          <Row label="Co-founder Name"><input className="input" value={settings.co_founder_name ?? ""} onChange={(e) => set("co_founder_name", e.target.value)} /></Row>
+          <Row label="Co-founder Role"><input className="input" value={settings.co_founder_role ?? ""} onChange={(e) => set("co_founder_role", e.target.value)} /></Row>
+          <Row label="Co-founder Bio"><textarea rows={5} className="input" value={settings.co_founder_bio ?? ""} onChange={(e) => set("co_founder_bio", e.target.value)} /></Row>
+          <Row label="Co-founder Photo">
+            <input type="file" accept="image/*" onChange={async (e) => {
+              if (e.target.files?.[0]) {
+                setUploading(true);
+                try {
+                  const url = await uploadFile(e.target.files[0], "site-assets", "team");
+                  set("co_founder_image_url", url);
+                } finally { setUploading(false); }
+              }
+            }} className="text-sm" />
+          </Row>
+
+          <hr className="my-6 border-primary/10" />
+
+          <Row label="Director Name"><input className="input" value={settings.director_name ?? ""} onChange={(e) => set("director_name", e.target.value)} /></Row>
+          <Row label="Director Role"><input className="input" value={settings.director_role ?? ""} onChange={(e) => set("director_role", e.target.value)} /></Row>
+          <Row label="Director Bio"><textarea rows={5} className="input" value={settings.director_bio ?? ""} onChange={(e) => set("director_bio", e.target.value)} /></Row>
+          <Row label="Director Photo">
+            <input type="file" accept="image/*" onChange={async (e) => {
+              if (e.target.files?.[0]) {
+                setUploading(true);
+                try {
+                  const url = await uploadFile(e.target.files[0], "site-assets", "team");
+                  set("director_image_url", url);
+                } finally { setUploading(false); }
+              }
+            }} className="text-sm" />
+          </Row>
+
+          <hr className="my-6 border-primary/10" />
+
+          <Row label="Member Name"><input className="input" value={settings.member_name ?? ""} onChange={(e) => set("member_name", e.target.value)} /></Row>
+          <Row label="Member Role"><input className="input" value={settings.member_role ?? ""} onChange={(e) => set("member_role", e.target.value)} /></Row>
+          <Row label="Member Bio"><textarea rows={5} className="input" value={settings.member_bio ?? ""} onChange={(e) => set("member_bio", e.target.value)} /></Row>
+          <Row label="Member Photo">
+            <input type="file" accept="image/*" onChange={async (e) => {
+              if (e.target.files?.[0]) {
+                setUploading(true);
+                try {
+                  const url = await uploadFile(e.target.files[0], "site-assets", "team");
+                  set("member_image_url", url);
+                } finally { setUploading(false); }
+              }
+            }} className="text-sm" />
+          </Row>
         </Section>
 
         <Section title="Donation Details (optional — shown on the Donate page only if filled in)">

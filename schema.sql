@@ -191,6 +191,18 @@ create table public.site_settings (
   founder_role text,
   founder_bio text,
   founder_image_url text,
+  co_founder_name text,
+  co_founder_role text,
+  co_founder_bio text,
+  co_founder_image_url text,
+  director_name text,
+  director_role text,
+  director_bio text,
+  director_image_url text,
+  member_name text,
+  member_role text,
+  member_bio text,
+  member_image_url text,
   upi_id text,               -- fill in later from admin > Settings if you want it shown
   bank_details text,         -- fill in later from admin > Settings if you want it shown
   updated_at timestamptz not null default now()

@@ -59,6 +59,18 @@ export interface SiteSettings {
   founder_role: string | null;
   founder_bio: string | null;
   founder_image_url: string | null;
+  co_founder_name: string | null;
+  co_founder_role: string | null;
+  co_founder_bio: string | null;
+  co_founder_image_url: string | null;
+  director_name: string | null;
+  director_role: string | null;
+  director_bio: string | null;
+  director_image_url: string | null;
+  member_name: string | null;
+  member_role: string | null;
+  member_bio: string | null;
+  member_image_url: string | null;
   upi_id: string | null;
   bank_details: string | null;
   updated_at: string;
@@ -110,6 +122,21 @@ export const fallbackSettings: SiteSettings = {
     'Aman Singh is the founder of Karuna Sneham Foundation, driven by a passion for creating meaningful social impact and bringing happiness to underprivileged children and communities. Alongside his work with the foundation, Aman is pursuing an MBA in Business Analytics at Chandigarh University, where he is developing his expertise in data analytics, business strategy, technology, and problem-solving. He believes that meaningful change happens when compassion is combined with action. Through Karuna Sneham Foundation, he aims to create opportunities for individuals to turn their special moments — such as birthdays and anniversaries — into moments of happiness for children in need. "A celebration becomes more meaningful when it brings a smile to someone who needs it."',
 
   founder_image_url: null,
+
+  co_founder_name: null,
+  co_founder_role: null,
+  co_founder_bio: null,
+  co_founder_image_url: null,
+
+  director_name: null,
+  director_role: null,
+  director_bio: null,
+  director_image_url: null,
+
+  member_name: null,
+  member_role: null,
+  member_bio: null,
+  member_image_url: null,
 
   upi_id: "UJJ83981816501@Ujjivan",
   bank_details: null,

@@ -90,42 +90,78 @@ export default async function AboutPage() {
         </div>
       </div>
 
-      {/* Founder Spotlight Card */}
-      {settings.founder_name && (
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-slate-950 p-8 sm:p-12 text-white shadow-2xl border border-white/10">
-          <div className="absolute -top-12 -right-12 h-60 w-60 rounded-full bg-secondary/20 blur-3xl pointer-events-none" />
-          
-          <div className="relative z-10 space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold text-secondary-light backdrop-blur-md border border-white/10">
-              <Sparkles className="h-3.5 w-3.5" /> Meet Our Leadership
-            </div>
+      {/* Team Members */}
+      <div className="space-y-8">
+        {settings.founder_name && (
+          <TeamMemberCard name={settings.founder_name} role={settings.founder_role} bio={settings.founder_bio} imageUrl={settings.founder_image_url} tag="Founder" />
+        )}
+        {settings.co_founder_name && (
+          <TeamMemberCard name={settings.co_founder_name} role={settings.co_founder_role} bio={settings.co_founder_bio} imageUrl={settings.co_founder_image_url} tag="Co-Founder" />
+        )}
+        {settings.director_name && (
+          <TeamMemberCard name={settings.director_name} role={settings.director_role} bio={settings.director_bio} imageUrl={settings.director_image_url} tag="Director" />
+        )}
+        {settings.member_name && (
+          <TeamMemberCard name={settings.member_name} role={settings.member_role} bio={settings.member_bio} imageUrl={settings.member_image_url} tag="Core Member" />
+        )}
+      </div>
+    </div>
+  );
+}
 
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
-              {settings.founder_image_url ? (
-                <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-2xl border-2 border-white/20 shadow-lg">
-                  <Image src={settings.founder_image_url} alt={settings.founder_name} fill className="object-cover" />
-                </div>
-              ) : (
-                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-white font-display text-2xl font-bold border border-white/15">
-                  AS
-                </div>
-              )}
+function TeamMemberCard({
+  name,
+  role,
+  bio,
+  imageUrl,
+  tag,
+}: {
+  name: string;
+  role: string | null;
+  bio: string | null;
+  imageUrl: string | null;
+  tag: string;
+}) {
+  const initials = name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .substring(0, 2)
+    .toUpperCase();
+    
+  return (
+    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-slate-950 p-8 sm:p-12 text-white shadow-2xl border border-white/10">
+      <div className="absolute -top-12 -right-12 h-60 w-60 rounded-full bg-secondary/20 blur-3xl pointer-events-none" />
+      
+      <div className="relative z-10 space-y-6">
+        <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold text-secondary-light backdrop-blur-md border border-white/10">
+          <Sparkles className="h-3.5 w-3.5" /> {tag}
+        </div>
 
-              <div className="space-y-2">
-                <h3 className="font-display text-2xl font-bold text-white">{settings.founder_name}</h3>
-                {settings.founder_role && (
-                  <p className="text-xs font-semibold text-secondary-light tracking-wide uppercase">
-                    {settings.founder_role}
-                  </p>
-                )}
-                <p className="text-sm text-white/85 leading-relaxed whitespace-pre-line pt-2">
-                  {settings.founder_bio}
-                </p>
-              </div>
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+          {imageUrl ? (
+            <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-2xl border-2 border-white/20 shadow-lg">
+              <Image src={imageUrl} alt={name} fill className="object-cover" />
             </div>
+          ) : (
+            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-white font-display text-2xl font-bold border border-white/15">
+              {initials}
+            </div>
+          )}
+
+          <div className="space-y-2">
+            <h3 className="font-display text-2xl font-bold text-white">{name}</h3>
+            {role && (
+              <p className="text-xs font-semibold text-secondary-light tracking-wide uppercase">
+                {role}
+              </p>
+            )}
+            <p className="text-sm text-white/85 leading-relaxed whitespace-pre-line pt-2">
+              {bio}
+            </p>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
